@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql" // با توجه به هاست سی‌پنل، MySQL بهترین و سازگارترین گزینه است
+  url      = env("DATABASE_URL")
+}
+
+// ---------------- Enums (لیست‌های ثابت) ----------------
+enum Role {
+  ADMIN
+  COACH
+  STUDENT
+}
+
+enum PaymentStatus {
+  PENDING
+  SUCCESS
+  FAILED
+}
+
+enum EnrollmentStatus {
+  ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+// ---------------- Models (جداول دیتابیس) ----------------
+
+model User {
+  id             String   @id @default(uuid())
+  phone          String   @unique
+  name           String?
+  nationalCode   String?  @unique
+  parentPhone    String?  // برای تماس با والدین هنرجویان زیر سن قانونی
+  role           Role     @default(STUDENT)
+  createdAt      DateTime @default(now())
+  
+  // روابط دیتابیس (Relations)
+  enrollments    Enrollment[]  // دوره‌هایی که فرد به عنوان هنرجو ثبت‌نام کرده
+  payments       Payment[]     // پرداخت‌های کاربر
+  
+  // روابط مخصوص نقش مربی
+  coaching       CourseCoach[] // دوره‌هایی که به عنوان مربی در آن‌ها تدریس می‌کند
+  assignedStudents Enrollment[] @relation("CoachToEnrollment") // هنرجویانی که مستقیماً به این مربی اختصاص یافته‌اند
+}
+
+model Course {
+  id          String   @id @default(uuid())
+  title       String
+  price       Int
+  capacity    Int      // ظرفیت کل دوره
+  startDate   DateTime
+  endDate     DateTime
+  createdAt   DateTime @default(now())
+
+  coaches     CourseCoach[] // مربیان اختصاص یافته به این دوره (با اولویت)
+  enrollments Enrollment[]  // هنرجویان ثبت‌نامی
+}
+
+// جدول میانی: اتصال مربی به دوره + سیستم اولویت‌بندی
+model CourseCoach {
+  id        String @id @default(uuid())
+  courseId  String
+  coachId   String
+  priority  Int    // عدد 1 یعنی اولویت اول پر شدن ظرفیت، 2 یعنی اولویت دوم و ...
+
+  course    Course @relation(fields: [courseId], references: [id])
+  coach     User   @relation(fields: [coachId], references: [id])
+
+  @@unique([courseId, coachId]) // جلوگیری از ثبت تکراری یک مربی در یک دوره
+}
+
+// جدول ثبت‌نام: قلب سیستم تخصیص خودکار
+model Enrollment {
+  id          String   @id @default(uuid())
+  studentId   String
+  courseId    String
+  coachId     String   // آیدی مربی‌ای که سیستم به صورت خودکار از روی اولویت به این هنرجو اختصاص داده است
+  status      EnrollmentStatus @default(ACTIVE)
+  progress    Int      @default(0) // درصد پیشرفت یا تعداد جلسات حضور یافته
+  createdAt   DateTime @default(now())
+
+  student     User   @relation(fields: [studentId], references: [id])
+  course      Course @relation(fields: [courseId], references: [id])
+  coach       User   @relation("CoachToEnrollment", fields: [coachId], references: [id])
+}
+
+model Payment {
+  id            String   @id @default(uuid())
+  userId        String
+  amount        Int
+  status        PaymentStatus @default(PENDING)
+  trackingCode  String?
+  createdAt     DateTime @default(now())
+
+  user          User @relation(fields: [userId], references: [id])
+}
