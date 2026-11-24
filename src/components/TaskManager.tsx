@@ -126,9 +126,11 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
     }
   };
 
-  // Filter Tasks
+  // Filter & Sort Tasks:
+  // - Completed tasks automatically sink to the bottom (ته لیست)
+  // - Uncompleted tasks sorted by scheduled execution time (طبق ساعت انجام به صدر لیست)
   const filteredTasks = useMemo(() => {
-    return tasks.filter((task) => {
+    const list = tasks.filter((task) => {
       // 1. Week Day / All Filter
       if (activeDateTab !== 'all' && task.dueDate !== activeDateTab) {
         return false;
@@ -153,6 +155,45 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
       }
 
       return true;
+    });
+
+    const priorityWeight: Record<TaskPriority, number> = {
+      high: 3,
+      medium: 2,
+      low: 1,
+    };
+
+    return list.sort((a, b) => {
+      // 1. Completed tasks ALWAYS sink to the bottom
+      if (a.completed !== b.completed) {
+        return a.completed ? 1 : -1;
+      }
+
+      // 2. In 'all' view across different dates, sort by date first
+      if (activeDateTab === 'all' && a.dueDate !== b.dueDate) {
+        return a.dueDate.localeCompare(b.dueDate);
+      }
+
+      // 3. For tasks on the same date: sort by scheduled execution time (reminderTime)
+      const aTime = a.reminderTime?.trim();
+      const bTime = b.reminderTime?.trim();
+
+      if (aTime && bTime) {
+        const timeDiff = aTime.localeCompare(bTime);
+        if (timeDiff !== 0) return timeDiff;
+      } else if (aTime && !bTime) {
+        // Scheduled tasks come before unscheduled ones
+        return -1;
+      } else if (!aTime && bTime) {
+        return 1;
+      }
+
+      // 4. Priority comparison (High > Medium > Low)
+      const prioDiff = (priorityWeight[b.priority] || 0) - (priorityWeight[a.priority] || 0);
+      if (prioDiff !== 0) return prioDiff;
+
+      // 5. If times and priorities are equal, newest created first
+      return b.createdAt - a.createdAt;
     });
   }, [
     tasks,
