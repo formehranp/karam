@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a73e8" />
+      <stop offset="100%" stop-color="#0d47a1" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.25" />
+    </filter>
+  </defs>
+
+  <!-- Base Rounded Container (Material Design 3 Squircle) -->
+  <rect x="8" y="8" width="112" height="112" rx="28" fill="url(#bgGrad)" filter="url(#shadow)" />
+
+  <!-- Inner Calendar Shape -->
+  <rect x="24" y="24" width="80" height="80" rx="16" fill="#ffffff" fill-opacity="0.15" />
+
+  <!-- Calendar Top Header Strip -->
+  <path d="M 24 40 L 104 40" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-opacity="0.9" />
+
+  <!-- Calendar Rings / Hooks -->
+  <circle cx="44" cy="24" r="3" fill="#ffffff" />
+  <circle cx="84" cy="24" r="3" fill="#ffffff" />
+
+  <!-- Material Checkmark in Center -->
+  <path d="M 42 66 L 56 80 L 86 50" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

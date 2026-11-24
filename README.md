@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# کارام (Karam) | دستیار هوشمند کارهای روزانه و تقویم شمسی برای تب جدید مرورگر
 
-## Getting Started
+<div align="center">
 
-First, run the development server:
+![کارام](public/icons/icon-128.png)
 
+**اکستنشن تب جدید (New Tab) برای گوگل کروم و مایکروسافت اج**  
+طراحی مدرن بر پایه **Material Design 3 (Google Material You)** با تقویم هجری شمسی، ساعت زنده، مدیریت وظایف کاملاً آفلاین، آب و هوا و میانبرهای دسترسی سریع.
+
+</div>
+
+---
+
+## ✨ امکانات و قابلیت‌ها
+
+### 🕒 ساعت زنده و تاریخ دوگانه (شمسی و میلادی)
+- نمایش زنده ساعت به وقت ایران با ثانیه‌شمار و فرمت ۱۲ و ۲۴ ساعته.
+- پیام‌های احوال‌پرسی پویا متناسب با زمان روز (صبح بخیر، ظهر بخیر، بعدازظهر بخیر، شبت بخیر و...).
+- تاریخ کامل هجری شمسی به همراه تاریخ میلادی زیر آن.
+
+### 📅 تقویم هجری شمسی و مناسبت‌ها
+- پاپ‌آپ تقویم کامل هجری شمسی در کنار دکمه‌های کنترل.
+- نمایش تعطیلات رسمی و مناسبت‌های ملی و مذهبی ایران.
+- نوار تب‌های روزهای هفته (شنبه تا جمعه + همه کارها) در بالای بخش تسک‌ها با پوشش کامل ۱۰۰٪ عرض صفحه.
+
+### 🌤️ وضعیت آب و هوا و دمای زنده
+- نمایش وضعیت کیفی دما با آیکون‌های اختصاصی:
+  - ❄️ **سرد:** کمتر از ۱۴ درجه (آیکون سرما)
+  - ⛅ **معتدل:** بین ۱۴ تا ۲۶ درجه (آیکون ابر و خورشید)
+  - ☀️ **گرم:** بیش از ۲۶ درجه (آیکون آفتاب)
+- امکان انتخاب شهر از بین مراکز استان‌ها و شهرهای اصلی ایران در تنظیمات.
+
+### 📝 مدیریت وظایف روزانه (Task Manager)
+- کاملاً آفلاین و سریع با استفاده از `Chrome Storage API`.
+- نوار پیشرفت زنده درصد انجام کارهای روز جاری.
+- پاپ‌آپ افزودن و ویرایش تسک با امکانات پیشرفته:
+  - فیلد عنوان و توضیحات
+  - انتخاب تاریخ سررسید شمسی
+  - **انتخاب ساعت به سبک Scroll Wheel Picker چرخشی (iOS / Material 3)**
+  - تعیین اولویت (فوری، متوسط، عادی)
+  - دسته‌بندی موضوعی (کاری، شخصی، یادگیری، خرید و...)
+- جستجوی سریع در عنوان و توضیحات تسک‌ها و فیلتر بر اساس وضعیت و اولویت.
+- قابلیت بازگردانی (Undo) تسک‌های حذف‌شده.
+
+### 📊 خروجی اکسل تسک‌ها (Excel Export)
+- دکمه اختصاصی خروجی اکسل در کنار تسک جدید.
+- فیلتر بر اساس سال و ماه شمسی (فروردین تا اسفند + کل سال).
+- خروجی کاملاً فارسی، فونت استاندارد وزیرمتن و **راست‌چین شده (RTL)** با باز شدن مستقیم در مایکروسافت اکسل.
+
+### 🔗 نوار میانبر وب‌سایت‌ها (Quick Links)
+- دسترسی سریع به سایت‌های پرکاربرد به سبک آیکون‌های مینیمال با تولتیپ شناور.
+- پاپ‌آپ استاندارد برای افزودن میانبر جدید با پیش‌نمایش زنده فاوآیکون و پیشنهادهای آماده.
+- باز شدن خودکار هر لینک در تب جدید مرورگر.
+
+### 🎨 شخصی‌سازی و تم
+- پشتیبانی کامل از حالت‌های **روشن (Light)**، **تاریک (Dark)** و **پیروی از سیستم (System)**.
+- ۵ پالت رنگی جذاب Material You (آبی گوگل، سبز زمردی، بنفش، کهربایی، طوسی مینیمال).
+- تایپوگرافی زیبا با فونت آزاد **وزیرمتن (Vazirmatn)** به صورت باندل محلی و بدون نیاز به اینترنت.
+- پشتیبان‌گیری و بازیابی داده‌ها با فایل JSON.
+
+---
+
+## 🚀 راهنمای نصب و راه‌اندازی برای توسعه
+
+### پیش‌نیازها
+- **Node.js** نسخه ۱۸ به بالا
+- **npm** یا **pnpm**
+
+### مراحل نصب
 ```bash
+# ۱. کلون کردن ریپازیتوری
+git clone https://github.com/formehranp/karam.git
+cd karam
+
+# ۲. نصب وابستگی‌ها
+npm install
+
+# ۳. اجرای حالت توسعه (Live Dev Server)
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# ۴. بیلد نهایی اکستنشن
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+پوشه خروجی `dist/` به صورت یک اکستنشن کامل و بهینه‌سازی شده Manifest V3 تولید می‌شود.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🧩 نصب در مرورگر گوگل کروم / اج
 
-## Learn More
+1. در مرورگر خود به آدرس `chrome://extensions` بروید.
+2. گزینه **Developer mode** را در گوشه بالا سمت راست فعال کنید.
+3. روی دکمه **Load unpacked** کلیک کنید.
+4. پوشه `dist` از پوشه پروژه را انتخاب کنید.
+5. یک تب جدید باز کنید و از کارام لذت ببرید! 🎉
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ تکنولوژی‌های به‌کار رفته
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **React 18** + **TypeScript**
+- **Vite 6** (سریع‌ترین ابزار بیلد مدرن فرانت‌اند)
+- **Tailwind CSS 3**
+- **Google Material Design 3 (M3) Tokens**
+- **Vazirmatn Font (فونت استاندارد وزیرمتن)**
+- **Lucide Icons**
+- **Chrome Extension Manifest V3 (MV3)**
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📄 مجوز (License)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+این پروژه تحت مجوز [MIT](LICENSE) منتشر شده است.

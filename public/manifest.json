@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "کارام | تقویم شمسی و مدیریت کارها",
+  "short_name": "کارام",
+  "version": "1.0.0",
+  "description": "تب جدید مدرن کارام بر پایه متریال دیزاین ۳ با تقویم هجری شمسی، ساعت زنده ایران و مدیریت کارهای روزانه کاملاً آفلاین",
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "background": {
+    "service_worker": "service-worker.js",
+    "type": "module"
+  },
+  "permissions": [
+    "storage",
+    "alarms",
+    "notifications",
+    "tabs"
+  ],
+  "action": {
+    "default_title": "کارام - وظایف امروز",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  }
+}
