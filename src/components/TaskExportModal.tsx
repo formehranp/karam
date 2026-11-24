@@ -1,8 +1,9 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { X, FileSpreadsheet, Download, Check, AlertCircle } from 'lucide-react';
+import { X, Download, Check, AlertCircle } from 'lucide-react';
 import { Task } from '../types';
 import { getTodayJalali, JALALI_MONTH_NAMES, toPersianDigits } from '../utils/jalali';
 import { exportTasksToCSV, exportTasksToXLS } from '../utils/excelExport';
+import { ExportIcon } from './ExportIcon';
 
 interface TaskExportModalProps {
   isOpen: boolean;
@@ -112,8 +113,8 @@ export const TaskExportModal: React.FC<TaskExportModalProps> = ({
         {/* Header */}
         <div className="flex items-center justify-between pb-3 border-b border-m3-outline-variant/20">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
-              <FileSpreadsheet className="w-5 h-5" />
+            <div className="w-10 h-10 rounded-2xl bg-m3-primary/10 flex items-center justify-center">
+              <ExportIcon className="w-5 h-5" />
             </div>
             <div>
               <h3 className="text-base font-bold text-m3-on-surface">

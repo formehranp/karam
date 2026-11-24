@@ -5,12 +5,12 @@ import {
   CheckCircle2,
   Layers,
   Inbox,
-  FileDown,
 } from 'lucide-react';
 import { Task, TaskPriority, TaskCategory, JalaliDate } from '../types';
 import { TaskItem } from './TaskItem';
 import { TaskModal } from './TaskModal';
 import { TaskExportModal } from './TaskExportModal';
+import { ExportIcon } from './ExportIcon';
 import {
   toPersianDigits,
   formatJalaliDateISO,
@@ -257,7 +257,7 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
             <span>تسک جدید</span>
           </button>
 
-          {/* Excel Export Button (Icon-only, Placed AFTER New Task button) */}
+          {/* Excel Export Button (Icon-only with duotone export icon, Placed AFTER New Task button) */}
           <button
             type="button"
             onClick={() => setIsExportModalOpen(true)}
@@ -265,7 +265,7 @@ export const TaskManager: React.FC<TaskManagerProps> = ({
             title="خروجی اکسل تسک‌ها"
             aria-label="خروجی اکسل تسک‌ها"
           >
-            <FileDown className="w-4.5 h-4.5 text-emerald-600 dark:text-emerald-400" />
+            <ExportIcon className="w-5 h-5" />
           </button>
         </div>
       </div>
