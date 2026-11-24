@@ -5,9 +5,9 @@ interface ExportIconProps {
 }
 
 /**
- * Modern duotone SVG export icon inspired by Material Design 3 / iOS:
- * - Rounded box outline with soft primary tint
- * - Bold outward diagonal arrow with solid primary color
+ * Modern duotone SVG export icon with vertical upward arrow:
+ * - Rounded tray/box outline at the bottom with soft primary tint
+ * - Straight vertical arrow pointing UP with solid primary color
  */
 export const ExportIcon: React.FC<ExportIconProps> = ({
   className = 'w-5 h-5',
@@ -19,18 +19,18 @@ export const ExportIcon: React.FC<ExportIconProps> = ({
     className={className}
     aria-hidden="true"
   >
-    {/* Box Outline (Soft matching color) */}
+    {/* Tray / Box Container (Soft matching color) */}
     <path
-      d="M12 4H7C5.34315 4 4 5.34315 4 7V17C4 18.6569 5.34315 20 7 20H17C18.6569 20 20 18.6569 20 17V12"
+      d="M4 12V17C4 18.6569 5.34315 20 7 20H17C18.6569 20 20 18.6569 20 17V12"
       stroke="currentColor"
       strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
       className="text-m3-primary opacity-45 dark:opacity-55"
     />
-    {/* Outward Arrow (Solid vibrant primary color) */}
+    {/* Vertical Upward Arrow (Solid vibrant primary color) */}
     <path
-      d="M10 14L20 4M20 4H14M20 4V10"
+      d="M12 15V3.5M7 8L12 3L17 8"
       stroke="currentColor"
       strokeWidth="2.5"
       strokeLinecap="round"
